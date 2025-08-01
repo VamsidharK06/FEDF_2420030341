@@ -3,13 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Page</title>
+    <style>
+        body {
+            background-color: aqua;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Enterprise-style button */
+        button {
+            padding: 10px 24px;
+            margin: 12px 6px 0 0;
+            border: none;
+            border-radius: 6px;
+            background-color: #0d6efd;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0b5ed7;
+        }
+
+        button:active {
+            transform: scale(0.97);
+            box-shadow: 0 0 8px #66d9ff, 0 0 4px #007BFF;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="tel"] {
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid gray;
+            width: 200px;
+        }
+    </style>
 </head>
-<body style="background-color: aqua;">
-    <h1 style="font-variant: small-caps;">This is H1 content</h1>
+<body>
+
+    <h1>This is H1 content</h1>
     <h2 style="color: brown;">This is H2 content.</h2>
+
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto alias nobis reiciendis odio, eos quia ut ipsam quas libero molestiae maiores dicta ullam nostrum delectus iure omnis autem doloribus commodi!</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, cupiditate, eaque amet similique doloremque autem repudiandae, culpa error aspernatur sequi nemo temporibus voluptates et! Quidem odit atque magni iste repellendus!</p>
+
     <ol type="i">
         <li>FEDF</li>
         <li>AIML</li>
@@ -17,17 +73,64 @@
         <li>DBMS</li>
         <li>OS</li>
     </ol>
-    <ul type="">
+
+    <ul>
         <li>FEDF</li>
         <li>AIML</li>
         <li>OOPS</li>
         <li>DBMS</li>
     </ul>
-    <table border="1">
-        <th>Semester</th><th>CGPA</th>
+
+    <table>
+        <tr><th>Semester</th><th>CGPA</th></tr>
         <tr><td>1</td><td>8.5</td></tr>
         <tr><td>2</td><td>8.7</td></tr>
         <tr><td>3</td><td>8.1</td></tr>
     </table>
+
+    <!-- Student Information Form -->
+    <h2>Student Information</h2>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id"><br>
+
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" name="branch"><br>
+
+        <label for="phone">Phone No.:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" required><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <script>
+        const phoneInput = document.getElementById('phone');
+        let fullPhone = '';
+
+        phoneInput.addEventListener('input', () => {
+            phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
+            if (phoneInput.value.length > 10) {
+                phoneInput.value = phoneInput.value.slice(0, 10);
+            }
+        });
+
+        phoneInput.addEventListener('blur', () => {
+            if (phoneInput.value.length === 10) {
+                fullPhone = phoneInput.value;
+                phoneInput.value = fullPhone.slice(0, 5) + '*****';
+            }
+        });
+
+        phoneInput.addEventListener('focus', () => {
+            if (fullPhone) {
+                phoneInput.value = fullPhone;
+            }
+        });
+    </script>
+
 </body>
 </html>
